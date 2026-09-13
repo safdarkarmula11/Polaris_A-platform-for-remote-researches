@@ -7304,12 +7304,24 @@ footer {
   gap: 8px;
 }
 
-.paper-context-items span {
+.paper-context-items span,
+.paper-context-items a {
   padding: 6px 12px;
   border: 1px solid var(--polaris-cyan);
   color: var(--polaris-ink);
   font-size: 12px;
   letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+.paper-context-items a {
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.paper-context-items a:hover {
+  background: var(--polaris-cyan);
+  color: #071013;
+  border-color: var(--polaris-cyan);
 }
 
 .paper-muted {
@@ -7855,5 +7867,92 @@ footer {
 
   .global-search-results {
     padding: 8px 18px 18px;
+  }
+}
+
+/* =========================================================
+   POLARIS — OUTREACH KIT (§9 For Creators & Outreach Kit)
+   ---------------------------------------------------------
+   Extends the paper-detail visual language (reuses
+   .paper-container, .paper-section-heading, .paper-context-*,
+   .evidence-*, .paper-original, .paper-provenance) with a
+   few kit-specific pieces: the button linking research to
+   the kit, the numbers strip, and the citation block.
+   ========================================================= */
+
+.paper-original-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.paper-kit-button {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 26px;
+  background: var(--polaris-orange, #a96b4f);
+  color: #f4f6f3;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.paper-kit-button:hover {
+  opacity: 0.85;
+}
+
+.kit-numbers-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.kit-number-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.kit-number-item strong {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 42px;
+  font-weight: 500;
+  color: var(--polaris-orange, #a96b4f);
+  line-height: 1;
+}
+
+.kit-number-item span {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--polaris-muted, #687273);
+}
+
+.kit-citation-block {
+  padding: 24px;
+  background: var(--polaris-paper-soft, #e5e5de);
+  border-left: 2px solid var(--polaris-orange, #a96b4f);
+}
+
+.kit-citation-block p {
+  margin: 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--polaris-ink, #111719);
+}
+
+@media (max-width: 560px) {
+  .kit-numbers-row {
+    gap: 24px;
+  }
+
+  .kit-number-item strong {
+    font-size: 32px;
   }
 }

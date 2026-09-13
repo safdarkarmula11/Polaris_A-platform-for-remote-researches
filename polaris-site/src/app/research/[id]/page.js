@@ -226,6 +226,7 @@ export default async function ResearchPaperPage({ params }) {
             <ContextBlock
               title="RESEARCH SITES"
               items={sites}
+              linkParam="site"
             />
 
             <ContextBlock
@@ -535,21 +536,31 @@ export default async function ResearchPaperPage({ params }) {
 
             </div>
 
-            {paper.pdf_url ? (
-              <a
-                href={paper.pdf_url}
-                target="_blank"
-                rel="noreferrer"
-                className="paper-pdf-button"
+                        <div className="paper-original-actions">
+              {paper.pdf_url ? (
+                <a
+                  href={paper.pdf_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="paper-pdf-button"
+                >
+                  OPEN ORIGINAL PDF
+                  <span>↗</span>
+                </a>
+              ) : (
+                <span className="paper-pdf-disabled">
+                  PDF NOT AVAILABLE
+                </span>
+              )}
+
+              <Link
+                href={`/creators/kit/${paper.id}`}
+                className="paper-kit-button"
               >
-                OPEN ORIGINAL PDF
-                <span>↗</span>
-              </a>
-            ) : (
-              <span className="paper-pdf-disabled">
-                PDF NOT AVAILABLE
-              </span>
-            )}
+                GENERATE OUTREACH KIT
+                <span>→</span>
+              </Link>
+            </div>
 
           </div>
 
@@ -582,6 +593,7 @@ function ContextBlock({
   title,
   items = [],
   hashtag = false,
+  linkParam = null,
 }) {
   return (
     <div className="paper-context-block">
@@ -591,11 +603,22 @@ function ContextBlock({
       {items.length > 0 ? (
         <div className="paper-context-items">
 
-          {items.map((item, index) => (
-            <span key={`${item}-${index}`}>
-              {hashtag ? `#${item}` : item}
-            </span>
-          ))}
+          {items.map((item, index) =>
+            linkParam ? (
+              <Link
+                key={`${item}-${index}`}
+                href={`/research?${linkParam}=${encodeURIComponent(
+                  item
+                )}`}
+              >
+                {hashtag ? `#${item}` : item}
+              </Link>
+            ) : (
+              <span key={`${item}-${index}`}>
+                {hashtag ? `#${item}` : item}
+              </span>
+            )
+          )}
 
         </div>
       ) : (
@@ -603,7 +626,6 @@ function ContextBlock({
           No data available.
         </p>
       )}
-
     </div>
   );
 }
